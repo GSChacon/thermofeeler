@@ -28,7 +28,6 @@ joblib
 memoized-property
 termcolor
 
-re
 nltk
 
 #twitter_api

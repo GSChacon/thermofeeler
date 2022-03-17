@@ -7,13 +7,13 @@ def preproc_func(tweet):
     '''Does the preprocessing of the tweets'''
 
     # stopwords: remove articles, prepositions, conjunctions etc
-    stopwords=['a','te','tu','tua','tuas','tém','um','uma','você','vocês','vos','à','às','ao','aos',
+    stopwords=['a','ah','g','h', 'cá','te','tu','tua','tuas','tém','um','uma','você','vocês','vos','à','às','ao','aos',
           'aquela','aquelas','aquele','aqueles','aquilo','as','até','com','como','da','das','de',
           'dela','delas','dele','deles','depois','do','dos','e','ela','elas','ele','eles','em',
           'entre','essa','essas','esse','esses','esta','eu','foi','fomos','for','fora','foram',
           'forem','formos','fosse','fossem','fui','fôramos','fôssemos', 'isso','isto','já','lhe',
           'lhes','me','mesmo','meu','meus','minha','minhas','muito','na','nas','no','nos','nossa',
-          'nossas','nosso','nossos','num','numa','nós','o','os','para','pela','pelas','pelo','pelos',
+          'nossas','nosso','nossos','num','numa','nós','oh','o','os','para','pela','pelas','pelo','pelos',
           'por','qual','quando','que','quem','se','seja','sejam','sejamos','sem','serei','seremos',
           'seria','seriam','será','serão','seríamos','seu','seus','somos','sou','sua','suas','são',
           'só','também']
@@ -35,6 +35,15 @@ def preproc_func(tweet):
     filtered_tweet = [w for w in word_tokens if not w in stopwords] # remove stopwords
 
     return filtered_tweet
+
+def kkkk(tweets):
+   # for tweet in tweets :
+    for word in tweets :
+        if word.count('k') >= 2 :
+            word_ = 'kkkk'
+            tweets[tweets.index(word)] = word_
+            results = tweets
+    return results
 
 def twitter_data(tweets):
     '''Take the results of the twitter_api results and put them into a dataframe ready to be processed'''
