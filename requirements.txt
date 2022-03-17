@@ -27,5 +27,10 @@ six>=1.14
 joblib
 memoized-property
 termcolor
+
 re
 nltk
+
+#twitter_api
+python-dotenv
+tweepy

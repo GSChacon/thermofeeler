@@ -1,5 +1,6 @@
 import re
 from nltk.tokenize import word_tokenize
+import pandas as pd
 
 # define a preproc function
 def preproc_func(tweet):
@@ -34,3 +35,12 @@ def preproc_func(tweet):
     filtered_tweet = [w for w in word_tokens if not w in stopwords] # remove stopwords
 
     return filtered_tweet
+
+def twitter_data(tweets):
+    '''Take the results of the twitter_api results and put them into a dataframe ready to be processed'''
+    tweets_search = []
+    for tweet in tweets.data :
+        tweets_search.append(tweet.text)
+    tweets_search = pd.Series(tweets_search)
+    X_pred = pd.DataFrame(tweets_search, columns=['tweet_text'])
+    return X_pred
