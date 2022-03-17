@@ -28,6 +28,9 @@ joblib
 memoized-property
 termcolor
 
-#api
+re
+nltk
+
+#twitter_api
 python-dotenv
 tweepy
