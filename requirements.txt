@@ -28,3 +28,9 @@ joblib
 memoized-property
 termcolor
 nltk
+
+# for haro
+tensorflow-datasets==4.4.0
+tensorflow-estimator==2.5.0
+tensorflow-macos
+tensorflow-metadata==1.5.0
