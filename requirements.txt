@@ -32,3 +32,7 @@ nltk
 #twitter_api
 python-dotenv
 tweepy
+
+# deep learning
+tensorflow
+gensim
