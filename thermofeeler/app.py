@@ -2,12 +2,13 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import time
+import requests
 
 from thermofeeler.predict import predict_query
 
 st.set_page_config(page_title="ThermoFeeler", page_icon="🌡",
-            layout="centered", # wide
-            initial_sidebar_state="auto") # collapsed
+        layout="centered", # wide
+        initial_sidebar_state="auto") # collapsed
 
 # st.markdown(
 #         """
@@ -24,11 +25,9 @@ st.set_page_config(page_title="ThermoFeeler", page_icon="🌡",
 title = """<p style="font-family:'Tangerine'; color:Red; font-size:42px;">ThermoFeeler</p>"""
 st.markdown(title, unsafe_allow_html=True)
 
-
 st.markdown("""Enter a twitter query""")
 
-query= st.text_input('Example : Apple')
-
+query= st.text_input('Example : Apple', 'Apple')
 
 # Progress bar
 latest_iteration = st.empty()
@@ -40,8 +39,12 @@ for i in range(100):
     bar.progress(i + 1)
     time.sleep(0.1)
 
-response = predict_query(query)
+url = f'https://thermofeeler-6hn6fqkota-uc.a.run.app/predict_query?query={query}&max_results=10'
+response = requests.get(url).json()[1]
 st.write(response)
 
-# if response != 200 :
-#     st.error('You entered an inexistent query')
+col1, col2, col3, col4 = st.columns(4)
+col1.write(f"Total number of tweets retrieved : {response['total']}")
+col2.write(f"Total number of negative tweets  : {response['negative total']}")
+col3.write(f"Total number of neutral tweets : {response['neutral total']}")
+col4.write(f"Total number of positive tweets : {response['positive total']}")
