@@ -26,10 +26,10 @@ def predict_query(query,max_results=10,return_tweets=False):
 
     print('Done!')
 
-    if return_tweets:
+    if return_tweets==True:
         return tweets_list, eval_dict
-
-    return eval_dict
+    else:
+        return eval_dict
 
 def predict_tweet(tweet):
     '''Receives a tweet string and returns a DataFrame with the probabilities
@@ -49,4 +49,4 @@ def predict_tweet(tweet):
 
     print('Done!')
 
-    return proba
+    return proba.to_dict()
