@@ -28,7 +28,6 @@ joblib
 memoized-property
 termcolor
 nltk
-pickle
 
 #twitter_api
 python-dotenv
