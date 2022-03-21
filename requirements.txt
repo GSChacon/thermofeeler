@@ -21,6 +21,8 @@ gcsfs
 google-cloud-storage
 mlflow
 s3fs
+fastapi
+uvicorn
 
 # utilities
 six>=1.14
@@ -28,12 +30,11 @@ joblib
 memoized-property
 termcolor
 nltk
-pickle
 
 #twitter_api
 python-dotenv
 tweepy
 
 # deep learning
-tensorflow
+tensorflow==2.8.0
 gensim
