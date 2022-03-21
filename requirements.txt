@@ -36,5 +36,5 @@ python-dotenv
 tweepy
 
 # deep learning
-tensorflow
+tensorflow==2.8.0
 gensim

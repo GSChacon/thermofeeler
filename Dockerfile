@@ -12,5 +12,7 @@ COPY .env /.env
 
 RUN pip install --upgrade pip
 RUN pip install -e .
+RUN python -m nltk.downloader punkt
+RUN cp -r /root/nltk_data /usr/lib/nltk_data
 
 CMD uvicorn app.fast:app --host 0.0.0.0 --port $PORT
