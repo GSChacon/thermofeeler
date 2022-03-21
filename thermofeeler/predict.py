@@ -1,7 +1,7 @@
 from thermofeeler import utils
 from thermofeeler import twitter_api
 
-def predict_query(query,max_results=10):
+def predict_query(query,max_results=10,return_tweets=False):
     '''Receives a query and returns the tweets as well as a dictionary with
     the predictions'''
     print('Getting tweets...')
@@ -26,7 +26,10 @@ def predict_query(query,max_results=10):
 
     print('Done!')
 
-    return tweets_list, eval_dict
+    if return_tweets:
+        return tweets_list, eval_dict
+
+    return eval_dict
 
 def predict_tweet(tweet):
     '''Receives a tweet string and returns a DataFrame with the probabilities
