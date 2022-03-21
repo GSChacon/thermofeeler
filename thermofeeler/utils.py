@@ -36,15 +36,6 @@ def preproc_func(tweet):
 
     return filtered_tweet
 
-def kkkk(tweets):
-   # for tweet in tweets :
-    for word in tweets :
-        if word.count('k') >= 2 :
-            word_ = 'kkkk'
-            tweets[tweets.index(word)] = word_
-            results = tweets
-    return results
-
 def twitter_data(tweets):
     '''Take the results of the twitter_api results and put them into a dataframe ready to be processed'''
     tweets_search = []
