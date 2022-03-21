@@ -1,5 +1,4 @@
 import re
-import joblib
 
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras import models
@@ -73,7 +72,7 @@ def evaluate_tweets(X_test):
     '''Evaluate the tweets and returns a y_pred'''
 
     # load model
-    model=models.load_model('../model')
+    model=models.load_model('/model')
 
     # predict y_pred
     y_pred=model.predict(X_test)
