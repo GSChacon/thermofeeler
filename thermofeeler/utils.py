@@ -44,16 +44,26 @@ def preproc_func(tweet):
 
     return filtered_tweet
 
+def hashtag_list(tweet):
+    '''return a list of the different hashtags used in a tweet'''
+
+    hashtags = []
+    if tweet.entities != None :
+        if 'hashtags' in tweet.entities.keys():
+            for i in range(len(tweet.entities['hashtags'])):
+                hashtags.append(tweet.entities['hashtags'][i]['tag'])
+    return hashtags
+
 def twitter_data(tweets):
-    '''Take the results of the twitter_api results and put them into a list ready to be processed'''
+    '''Take the results of the twitter_api (text and informations) query and put them into a list of lists ordered by parameters ready to be processed'''
 
-    tweets_search = []
-
+    tweets_search = [[],[],[],[],[]]
     for tweet in tweets.data :
-        tweets_search.append(tweet.text)
-    # tweets_search = pd.Series(tweets_search)
-    # X_pred = pd.DataFrame(tweets_search, columns=['tweet_text'])
-
+        tweets_search[0].append(tweet.text)
+        tweets_search[1].append(tweet.author_id)
+        tweets_search[2].append(tweet.created_at)
+        tweets_search[3].append(tweet.source)
+        tweets_search[4].append(hashtag_list(tweet))
     return tweets_search
 
 
