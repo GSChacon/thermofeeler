@@ -1,7 +1,4 @@
 import streamlit as st
-import numpy as np
-import pandas as pd
-import time
 import requests
 
 st.set_page_config(page_title="ThermoFeeler", page_icon="🌡",
