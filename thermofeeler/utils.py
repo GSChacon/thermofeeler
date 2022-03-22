@@ -48,7 +48,6 @@ def twitter_data(tweets):
     '''Take the results of the twitter_api results and put them into a list ready to be processed'''
 
     tweets_search = []
-
     for tweet in tweets.data :
         tweets_search.append(tweet.text)
     # tweets_search = pd.Series(tweets_search)
