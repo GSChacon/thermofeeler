@@ -30,8 +30,6 @@ joblib
 memoized-property
 termcolor
 nltk
-<<<<<<< HEAD
-=======
 
 #twitter_api
 python-dotenv
@@ -40,4 +38,3 @@ tweepy
 # deep learning
 tensorflow==2.8.0
 gensim
->>>>>>> 55a970c46a555ee90cda9250d0ff3bc529ba068e
