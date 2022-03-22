@@ -30,7 +30,7 @@ joblib
 memoized-property
 termcolor
 nltk
-<<<<<<< HEAD
+
 
 # for haro
 tensorflow-datasets==4.4.0
@@ -40,9 +40,7 @@ tensorflow-metadata==1.5.0
 
 unidecode
 autocorrect
-=======
-<<<<<<< HEAD
-=======
+
 
 #twitter_api
 python-dotenv
@@ -51,5 +49,3 @@ tweepy
 # deep learning
 tensorflow==2.8.0
 gensim
->>>>>>> 55a970c46a555ee90cda9250d0ff3bc529ba068e
->>>>>>> master
