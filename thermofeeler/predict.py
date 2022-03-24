@@ -12,7 +12,8 @@ def predict_query(query,max_results=10,return_tweets=False):
 
     print('Preprocessing tweets...')
     preproc_tweets=[]
-    for tweet in tweets_list:
+    for tweet in tweets_list[0]:
+        #tweets_list[0] : list of tweets' text
         preproc_tweets.append(utils.preproc_func(tweet))
 
     print('Tokenzing tweets...')
