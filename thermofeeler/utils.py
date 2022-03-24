@@ -24,7 +24,7 @@ def preproc_func(tweet):
           'nossas','nosso','nossos','num','numa','nós','oh','o','os','para','pela','pelas','pelo','pelos',
           'por','qual','quando','que','quem','se','seja','sejam','sejamos','sem','serei','seremos',
           'seria','seriam','será','serão','seríamos','seu','seus','somos','sou','sua','suas','são',
-          'só','também','ah','q','g','oh','eh','vc','tbm','também','tambem','voceh','você','voce']
+          'só','também','ah','q','g','oh','eh','vc','tbm','também','tambem','voceh','você','voce','rt']
 
     tweet = tweet.lower() # lowercase
 
