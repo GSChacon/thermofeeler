@@ -51,3 +51,26 @@ def predict_tweet(tweet):
     print('Done!')
 
     return proba.to_dict()
+
+def predict_week(query,max_results=20):
+    print('Getting tweets...')
+    tweets = twitter_api.twitter_request_week(query,max_results=max_results)
+
+    print('Organizing tweets...')
+    tweets_list = utils.twitter_data_week(tweets)
+
+    print('Preprocessing tweets...')
+    preproc_tweets=[]
+    for tweet in tweets_list[0]: #tweets_list[0] : list of tweets' text
+        preproc_tweets.append(utils.preproc_func(tweet))
+
+    print('Tokenzing tweets...')
+    X_test = utils.tokenize_tweets(preproc_tweets)
+
+    print('Predicting sentiments...')
+    y_pred = utils.evaluate_tweets(X_test)
+
+    print('Organizing data...')
+    predict_list = utils.get_predict_order(y_pred)
+
+    return tweets_list, predict_list
