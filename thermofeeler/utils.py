@@ -86,7 +86,7 @@ def twitter_data_week(tweets_week):
 def tokenize_tweets(tweets_search):
     '''Tokenize tweets in order to send them to the deep learn model'''
 
-    with open('tokenizer.pickle', 'rb') as handle:
+    with open('../tokenizer.pickle', 'rb') as handle:
         tk = pickle.load(handle)
 
     X_test_token = tk.texts_to_sequences(tweets_search)
@@ -98,7 +98,7 @@ def evaluate_tweets(X_test):
     '''Evaluate the tweets and returns a y_pred'''
 
     # load model
-    model=models.load_model('model')
+    model=models.load_model('../model')
 
     # predict y_pred
     y_pred=model.predict(X_test)
