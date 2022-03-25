@@ -53,3 +53,6 @@ tweepy
 
 # deep learning
 gensim
+
+# web
+streamlit=1.8.0
