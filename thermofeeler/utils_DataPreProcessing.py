@@ -2,7 +2,6 @@
 
 # 1.1  Import Libraries
 import warnings  # for life! code to avoid warnings
-warnings.filterwarnings('ignore')
 import unidecode  # 1.7
 import pandas as pd  # for life!
 import re  # 1.5 - 1.4
@@ -201,6 +200,7 @@ def reducing_error_char_repeatation(tweet):
     Pattern_alpha = re.compile(r"([A-Za-z])\1{1,}", re.DOTALL)
     # Limiting all the  repeatation to two characters.
     Formatted_tweet = Pattern_alpha.sub(r"\1\1", tweet)   # r'\1\1' --> It limits all the repeatation to two characters.
+    return Formatted_tweet
 
 # 1.12  Remove punctuations
 def remove_punctuation(tweet):
@@ -224,11 +224,6 @@ def remove_punctuation(tweet):
 
 # 1.13  Expand contraction words
 # Portuguese Word Mapping
-CONTRACTION_MAP_PT = {'é':'ser','eh':'ser','vc':'voce','vcs':'voces','tb': 'tambem','tbm': 'tambem',
-            'obg': 'obrigado','obrigada':'obrigado','gnt': 'gente', 'q': 'que', 'n': 'nao',
-            'cmg': 'comigo', 'p':'para','pra' :'para','ta': 'está','tá':'está','to': 'estou',
-            'vdd':'verdade','bjos':'beijo','bjo':'beijo','kd': 'cade', 'pq':'porque',
-            'cmg':'comigo','cm':'com','pc':'ca','aq':'aqui','qdo':'quando','p':'para','':'que','agr':'agora'}
 
 # The code for expanding contraction words
 def expand_contractions(tweet):  #, contraction_mapping =  CONTRACTION_MAP_PT):
@@ -247,6 +242,11 @@ def expand_contractions(tweet):  #, contraction_mapping =  CONTRACTION_MAP_PT):
     Output : Vamos para praia comigo quando voce sair do trabalho, bjs e obrigado
 
     """
+    CONTRACTION_MAP_PT = {'é':'ser','eh':'ser','vc':'voce','vcs':'voces','tb': 'tambem','tbm': 'tambem',
+            'obg': 'obrigado','obrigada':'obrigado','gnt': 'gente', 'q': 'que', 'n': 'nao',
+            'cmg': 'comigo', 'p':'para','pra' :'para','ta': 'está','tá':'está','to': 'estou',
+            'vdd':'verdade','bjos':'beijo','bjo':'beijo','kd': 'cade', 'pq':'porque',
+            'cmg':'comigo','cm':'com','pc':'ca','aq':'aqui','qdo':'quando','p':'para','':'que','agr':'agora'}
 # Tokenizing text into tokens.
     list_Of_tokens = tweet.split(' ')
     for word in list_Of_tokens:
@@ -291,7 +291,24 @@ def removing_special_characters(tweet):
 # Create our custom stopword list to add
 # Custom StopWords portuguese
 
-our_stopwords=['a','ah','g','h', 'd','ca','te','tu','tua','tuas','um','uma','voce','voces','vos', 'la','lo','lá',
+
+def removing_stopwords(tweet):
+    """
+    This function will remove stopwords which doesn't add much meaning to a sentence
+    & they can be remove safely without comprimising meaning of the sentence.
+
+    arguments:
+         input_tweet: "text" of type "String".
+
+    return:
+        value: Text after omitted all stopwords.
+
+    Example:
+    Input : hoje estou Barcelona está todos estamos voces estão agente ontem estive
+    Output : hoje Barcelona todos voces agente ontem
+
+    """
+    our_stopwords=['a','ah','g','h', 'd','ca','te','tu','tua','tuas','um','uma','voce','voces','vos', 'la','lo','lá',
                'as','ao','aos','aquela','aquelas','aquele','aqueles','aquilo','as','ate','com','como','da','das',
                'de','dela','delas','dele','deles','depois','do','dos','e','ela','elas','ele','eles','em','entre',
                'essa','essas','esse','esses','eu','for','isso','isto','já','lhe','lhes','me','mesmo','meu','meus',
@@ -314,24 +331,7 @@ our_stopwords=['a','ah','g','h', 'd','ca','te','tu','tua','tuas','um','uma','voc
                'proximo', 'proximos','quais', 'quanto', 'quantos','quem','sempre','si', 'sido','sob', 'sobre',
                'tal', 'talvez','tampouco', 'tanta', 'tantas','tanto', 'tao', 'tarde', 'te', 'todo', 'todos',
                'toda', 'todas','tudo', 'ultima', 'ultimas', 'ultimo', 'ultimos','vários','vez', 'vezes',]
-
-def removing_stopwords(tweet):
-    """
-    This function will remove stopwords which doesn't add much meaning to a sentence
-    & they can be remove safely without comprimising meaning of the sentence.
-
-    arguments:
-         input_tweet: "text" of type "String".
-
-    return:
-        value: Text after omitted all stopwords.
-
-    Example:
-    Input : hoje estou Barcelona está todos estamos voces estão agente ontem estive
-    Output : hoje Barcelona todos voces agente ontem
-
-    """
-    tweet = ' '.join([word for word in tweet.split() if word not in (stopwords.words('portuguese'))])
+    tweet = ' '.join([word for word in tweet.split() if word not in our_stopwords])
     return tweet
 
 # 1.16  Correct mis-spelled words in text
@@ -361,7 +361,7 @@ def spelling_correction(tweet):
 # La lematización analiza el texto circundante para
 # determinar la parte del discurso de una palabra dada, no clasifica las frases.
 
-nlp = stanza.Pipeline('pt')  # set the language for Portuguese (stanza)
+ # set the language for Portuguese (stanza)
 # Stanza it is built with highly accurate neural network components that enable efficient
 # training and evaluation with your own annotated data,
 
@@ -382,6 +382,7 @@ def lemmatization(tweet):
     Output : 'brincar treinar cantar jogar subir agredir '
 
     """
+    nlp = stanza.Pipeline('pt')
     lemma = ""
     for sent in nlp(tweet).sentences:
         for word in sent.words:
@@ -392,7 +393,7 @@ def lemmatization(tweet):
 # DESACTIVATE - We are using just Lemmatization for the moment...
 # stemmezation = False
 # The code for stemmezation
-stemmer = RSLPStemmer()  # A stemmer for Portuguese
+
 def stemmezation(tweet):
     """
     This function essentially chops
@@ -410,6 +411,7 @@ def stemmezation(tweet):
     Output : am  am     am     am   am    ame  amor  am     am     amo
 
    """
+    stemmer = RSLPStemmer()
     # Converting words to their root forms
     for token in tweet.split():
         print(stemmer.stem(token))
@@ -418,11 +420,11 @@ def stemmezation(tweet):
 # 1.19  Putting all in single function
 # Writing main function to merge all the preprocessing steps.
 
-def text_preprocessing(tweet, lowercase=True, links=True, remove_html=False,
+def text_preprocessing(tweet, lowercase=True, links=True, remove_html=True,
                        numbers=True, special_chars=True, repeatition=True,
                        newlines_tabs=True, punctuation=True, extra_whitespace=True,
                        contractions=True, mis_spell=True, stop_words=True,
-                       lemmatization_word=True, stemmezation = False,
+                       lemmatization_word=True, stemmezation = True,
                        accented_chars=True):
     """
     This function will preprocess input text and return
@@ -478,7 +480,6 @@ def text_preprocessing(tweet, lowercase=True, links=True, remove_html=False,
 
     word_tokens = word_tokenize(tweet) # tokenize tweet.
 
-    stemmer = RSLPStemmer()      # **DESACTIVATE
     if stemmezation == True:  # converts words to stemmer form.
         tweet = stemmezation(tweet)
 
