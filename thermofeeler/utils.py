@@ -55,7 +55,9 @@ def hashtag_list(tweet):
     return hashtags
 
 def twitter_data(tweets):
-    '''Take the results of the twitter_api (text and informations) query and put them into a list of lists ordered by parameters ready to be processed'''
+    '''Take the results of the twitter_api (text and informations)
+    query and put them into a list of lists ordered by parameters
+    ready to be processed'''
 
     tweets_search = [[],[],[],[],[]]
     for tweet in tweets.data :
@@ -66,11 +68,25 @@ def twitter_data(tweets):
         tweets_search[4].append(hashtag_list(tweet))
     return tweets_search
 
+def twitter_data_week(tweets_week):
+    '''Take the results of the twitter_api_week (text and informations)
+    query and put them into a list of lists ordered by parameters ready to
+    be processed'''
+    tweets_search = [[],[],[],[],[]]
+    for tweets in tweets_week:
+        for tweet in tweets.data :
+            tweets_search[0].append(tweet.text)
+            tweets_search[1].append(tweet.author_id)
+            tweets_search[2].append(tweet.created_at)
+            tweets_search[3].append(tweet.source)
+            tweets_search[4].append(hashtag_list(tweet))
+    return tweets_search
+
 
 def tokenize_tweets(tweets_search):
     '''Tokenize tweets in order to send them to the deep learn model'''
 
-    with open('tokenizer.pickle', 'rb') as handle:
+    with open('../tokenizer.pickle', 'rb') as handle:
         tk = pickle.load(handle)
 
     X_test_token = tk.texts_to_sequences(tweets_search)
@@ -82,7 +98,7 @@ def evaluate_tweets(X_test):
     '''Evaluate the tweets and returns a y_pred'''
 
     # load model
-    model=models.load_model('model')
+    model=models.load_model('../model')
 
     # predict y_pred
     y_pred=model.predict(X_test)
@@ -110,3 +126,10 @@ def get_proba(y_pred):
     proba=pd.DataFrame(y_pred,columns=['Negativo','Neutro','Positivo'])
 
     return proba
+
+def get_predict_order(y_pred):
+    '''return a list of prediction for every tweet'''
+    predict_list = []
+    for row in y_pred:
+        predict_list.append(np.argmax(row))
+    return predict_list
