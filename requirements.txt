@@ -30,15 +30,6 @@ joblib
 memoized-property
 termcolor
 
-# NLP/Viz
-unidecode
-autocorrect
-wordcloud
-plotly
-ipywidgets
-stanza
-nltk
-
 #twitter_api
 python-dotenv
 tweepy
