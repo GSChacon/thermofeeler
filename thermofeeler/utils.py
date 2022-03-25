@@ -129,7 +129,12 @@ def get_proba(y_pred):
 
 def get_predict_order(y_pred):
     '''return a list of prediction for every tweet'''
+
     predict_list = []
+
+    print(y_pred)
+
     for row in y_pred:
         predict_list.append(np.argmax(row))
+
     return predict_list
