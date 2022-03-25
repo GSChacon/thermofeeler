@@ -29,6 +29,7 @@ six>=1.14
 memoized-property
 termcolor
 nltk
+datetime
 
 #twitter_api
 python-dotenv
