@@ -132,9 +132,7 @@ def get_predict_order(y_pred):
 
     predict_list = []
 
-    print(y_pred)
-
     for row in y_pred:
-        predict_list.append(np.argmax(row))
+        predict_list.append(int(np.argmax(row)))
 
     return predict_list
