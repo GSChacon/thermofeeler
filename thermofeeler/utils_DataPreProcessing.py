@@ -483,5 +483,4 @@ def text_preprocessing(tweet, lowercase=True, links=True, remove_html=True,
     if stemmezation == True:  # converts words to stemmer form.
         tweet = stemmezation(tweet)
 
-
     return word_tokens
