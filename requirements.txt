@@ -26,18 +26,10 @@ uvicorn
 
 # utilities
 six>=1.14
-joblib
 memoized-property
 termcolor
-
-# NLP/Viz
-unidecode
-autocorrect
-wordcloud
-plotly
-ipywidgets
-stanza
 nltk
+datetime
 
 #twitter_api
 python-dotenv

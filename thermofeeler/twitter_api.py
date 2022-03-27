@@ -1,6 +1,5 @@
 import os
 import tweepy
-import pandas as pd
 from dotenv import load_dotenv, find_dotenv
 from datetime import datetime, timedelta
 

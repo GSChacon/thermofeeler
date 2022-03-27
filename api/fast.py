@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from thermofeeler import predict
-from google.cloud import storage
 
 app = FastAPI()
 
@@ -33,9 +32,8 @@ def predict_tweet(tweet):
     return proba
 
 @app.get("/predict_week")
-def predict_week(query, max_results=20):
+def predict_week(query, max_results=10):
     tweet_list,predict_list=predict.predict_week(query,
-                                    max_results=max_results,
-                                    return_tweets=True)
+                                    max_results=max_results)
 
     return tweet_list, predict_list
